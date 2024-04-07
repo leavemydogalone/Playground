@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "AttributeSet.h"
 #include "AuraAttributeSet.generated.h"
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
@@ -23,7 +23,11 @@ class AURA_API UAuraAttributeSet : public UAttributeSet
 
 public:
 	UAuraAttributeSet();
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	//he uses preattributechange in the demo, but says this one is preferrable as it uses base value and not the current value
+	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
 
 	// Will notify the client of any updates to health on the server using the onrep_health function
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
