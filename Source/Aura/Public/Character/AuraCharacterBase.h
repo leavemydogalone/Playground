@@ -32,4 +32,8 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+	//we are creating this function so we can make sure abilityactorinfo is set here before we then call the AbilityActorInfoSet function from AASC, where we bind to delegates in AuraAbilitySystemComponent
+
+	virtual void InitAbilityActorInfo();
+
 };
