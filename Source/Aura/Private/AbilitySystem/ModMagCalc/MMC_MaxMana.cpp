@@ -5,6 +5,7 @@
 #include "Interaction/CombatInterface.h"
 #include "AbilitySystem/ModMagCalc/MMC_MaxMana.h"
 
+//theres a more general implementation in the comments of episode 73
 UMMC_MaxMana::UMMC_MaxMana()
 {
 	IntelligenceDef.AttributeToCapture = UAuraAttributeSet::GetIntelligenceAttribute();
@@ -26,10 +27,11 @@ float UMMC_MaxMana::CalculateBaseMagnitude_Implementation(const FGameplayEffectS
 
 	float Intelligence = 0.f;
 	GetCapturedAttributeMagnitude(IntelligenceDef, Spec, EvaluationParameters, Intelligence);
+	//ensure it does not go below 0
 	Intelligence = FMath::Max<float>(Intelligence, 0.f);
 
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(Spec.GetContext().GetSourceObject());
 	const int32 PlayerLevel = CombatInterface->GetPlayerLevel();
 
-	return 40.f + 1.f * Intelligence + 10.f * PlayerLevel;
+	return 50.f + 2.5f * Intelligence + 15.f * PlayerLevel;
 }

@@ -5,6 +5,7 @@
 #include "Interaction/CombatInterface.h"
 #include "AbilitySystem/ModMagCalc/MMC_MacHealth.h"
 
+//theres a more general implementation in the comments of episode 73
 UMMC_MacHealth::UMMC_MacHealth()
 {
 	VigorDef.AttributeToCapture = UAuraAttributeSet::GetVigorAttribute();
@@ -26,6 +27,7 @@ float UMMC_MacHealth::CalculateBaseMagnitude_Implementation(const FGameplayEffec
 
 	float Vigor = 0.f;
 	GetCapturedAttributeMagnitude(VigorDef, Spec, EvaluationParameters, Vigor);
+	//ensure it does not go below 0
 	Vigor = FMath::Max<float>(Vigor, 0.f);
 
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(Spec.GetContext().GetSourceObject());
