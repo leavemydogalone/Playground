@@ -3,13 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 
 /**
+ * AuraGameplayTags
  * 
+ * Singleton containing native gameplay tags
  */
-class AURA_API AuraGameplayTags
+
+struct FAuraGameplayTags 
 {
 public:
-	AuraGameplayTags();
-	~AuraGameplayTags();
+
+static const FAuraGameplayTags& get() 
+{
+	return GameplayTags;
+}
+static void InitializeNativeGameplayTags();
+
+protected:
+
+private:
+	static FAuraGameplayTags GameplayTags;
 };
