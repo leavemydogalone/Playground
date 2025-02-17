@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "AbilitySystem/ModMagCalc/MMC_MacHealth.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "Interaction/CombatInterface.h"
-#include "AbilitySystem/ModMagCalc/MMC_MacHealth.h"
 
 //theres a more general implementation in the comments of episode 73
 UMMC_MacHealth::UMMC_MacHealth()

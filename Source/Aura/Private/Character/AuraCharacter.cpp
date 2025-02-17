@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Character/AuraCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "UI/HUD/AuraHUD.h"
 #include "Player/AuraPlayerState.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Character/AuraCharacter.h"
 #include "Player/AuraPlayerController.h"
 
 AAuraCharacter::AAuraCharacter()
