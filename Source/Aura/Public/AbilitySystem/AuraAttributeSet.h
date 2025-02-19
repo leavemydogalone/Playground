@@ -13,6 +13,8 @@
  	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
  	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+DECLARE_DELEGATE_RetVal(FGameplayAttribute, FAttributeSignautre);
+
 USTRUCT()
 struct FEffectProperties
 {
@@ -63,6 +65,8 @@ public:
 	//he uses preattributechange in the demo, but says this one is preferrable as it uses base value and not the current value. This does not work for effects with duration/infinite with no period like a buff/debuff
 	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+
+	TMap<FGameplayTag, FAttributeSignautre> TagsToAttributes;
 
 	/*
 		Primary Attributes
