@@ -28,7 +28,7 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 	AutoRun();
 }
 
-
+//To use navmesh in multiplayer, make sure to update the project settings to allow navmesh to be used on client.
 void AAuraPlayerController::AutoRun()
 {
 	if (!bAutoRunning) return;
@@ -48,59 +48,19 @@ void AAuraPlayerController::AutoRun()
 
 void AAuraPlayerController::CursorTrace()
 {
-	FHitResult CursorHit;
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 	if (!CursorHit.bBlockingHit) return;
 
 	LastActor = ThisActor;
 	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
 
-	/**
-	* Line trace from cursor. There are several scenarios
-	* A. LastActor is null && ThisActor is null
-	*	- do nothing
-	* B. Lastactor is null && thisactor is valid
-	*	- highlight thisactor
-	* C. Lastactor is valid && thisactor is null
-	*	- unhighlight last actor
-	* D. both actors aare valid, but last actor !== thisactor
-	*	- unhighlight lastactor and highlight thisactor
-	* E. both actors are valid, and are the same actor
-	*	- do nothing
-	*/
-
-	if (LastActor == nullptr)
+	if (LastActor != ThisActor)
 	{
-		if (ThisActor != nullptr)
-		{
-			// Case B
-			ThisActor->HighlightActor();
-		}
-		else
-		{
-			// Case A
-		}
-	}
-	else //lastactor is valid
-	{
-		if (ThisActor == nullptr)
-		{
-			//Case C
+		if (LastActor) {
 			LastActor->UnHighlightActor();
-
 		}
-		else //both actors are valid
-		{
-			if (LastActor != ThisActor)
-			{
-				//Case D
-				LastActor->UnHighlightActor();
-				ThisActor->HighlightActor();
-			}
-			else
-			{
-				//Case E
-			}
+		if (ThisActor) {
+			ThisActor->HighlightActor();
 		}
 	}
 }
@@ -134,14 +94,13 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 	{
 		if (FollowTime <= ShortPressThreshold)
 		{
-			APawn* ControlledPawn = GetPawn();
+			const APawn* ControlledPawn = GetPawn();
 			if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
 			{
 				Spline->ClearSplinePoints();
 				for (const FVector& PointLoc : NavPath->PathPoints)
 				{
 					Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
-					DrawDebugSphere(GetWorld(), PointLoc, 8.f, 8, FColor::Green, false, 5.f);
 				}
 				CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
 				bAutoRunning = true;
@@ -170,10 +129,10 @@ void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 	}
 	else {
 		FollowTime += GetWorld()->GetDeltaSeconds();
-		FHitResult Hit;
-		if (GetHitResultUnderCursor(ECC_Visibility, false, Hit))
+
+		if (CursorHit.bBlockingHit)
 		{
-			CachedDestination = Hit.ImpactPoint;
+			CachedDestination = CursorHit.ImpactPoint;
 		}
 
 		if (APawn* ControlledPawn = GetPawn())
