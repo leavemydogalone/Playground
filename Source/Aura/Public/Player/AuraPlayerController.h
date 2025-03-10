@@ -38,7 +38,14 @@ private:
 	UPROPERTY(Editanywhere, Category="Input");
 	TObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY(Editanywhere, Category = "Input");
+	TObjectPtr<UInputAction> ShiftAction;
+
 	void Move(const FInputActionValue& InputActionValue);
+
+	void ShiftPressed(const FInputActionValue& InputActionValue) { bShiftKeyDown = true; };
+	void ShiftReleased(const FInputActionValue& InputActionValue) { bShiftKeyDown = false; };
+	bool bShiftKeyDown = false;
 
 	void CursorTrace();
 	IEnemyInterface* LastActor;

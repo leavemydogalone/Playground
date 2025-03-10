@@ -18,6 +18,6 @@ void UAuraAssetManager::StartInitialLoading()
 	Super::StartInitialLoading();
 	FAuraGameplayTags::InitializeNativeGameplayTags();
 
-	//need to do this to allow target data, in this instance for targetdataundermouse.cpp. Specifically server data cache.
+	//need to do this to allow target data to be sent to the server, in this instance for targetdataundermouse.cpp.
 	UAbilitySystemGlobals::Get().InitGlobalData();
 }

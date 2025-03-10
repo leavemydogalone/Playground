@@ -18,8 +18,8 @@ void UTargetDataUnderMouse::Activate()
 		SendMouseCursorData();
 	}
 	else
-	{
 		//bind callback to server and wait for data
+	{
 		const FGameplayAbilitySpecHandle SpecHandle = GetAbilitySpecHandle();
 		const FPredictionKey ActivationPredicationKey = GetActivationPredictionKey();
 
@@ -32,10 +32,7 @@ void UTargetDataUnderMouse::Activate()
 		{
 			SetWaitingOnRemotePlayerData();
 		}
-
 	}
-
-
 }
 
 void UTargetDataUnderMouse::SendMouseCursorData()
