@@ -5,3 +5,5 @@
 #include "CoreMinimal.h"
 
 #define CUSTOM_DEPTH_RED 250
+//need to add channel to Project settings -> Collision
+#define ECC_PROJECTILE ECollisionChannel::ECC_GameTraceChannel1
