@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
 #include "Interaction/EnemyInterface.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 #include "AuraEnemy.generated.h"
 
 class UWidgetComponent;
@@ -27,6 +28,13 @@ public:
 	/* Combat Interface */
 	virtual int32 GetPlayerLevel() override;
 	/* End Combat Interface */
+
+	//we're okay bringing this over becuase overlaywidgetcontrollers isn't really a big class
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnMaxHealthChanged;
 
 protected:
 	virtual void BeginPlay() override;
