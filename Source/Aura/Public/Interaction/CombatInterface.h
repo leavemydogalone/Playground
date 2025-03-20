@@ -13,6 +13,7 @@ class UCombatInterface : public UInterface
 	GENERATED_BODY()
 };
 
+class UAnimMontage;
 /**
  * 
  */
@@ -29,4 +30,8 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void SetFacingTarget(const FVector &TargetLocation);
+
+	//blueprint native creates a blueprint event that can be overridden in blueprint and c++ (creates an _implementation function)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UAnimMontage* GetHitReactMontage();
 };
