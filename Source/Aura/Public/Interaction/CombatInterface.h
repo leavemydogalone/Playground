@@ -34,4 +34,6 @@ public:
 	//blueprint native creates a blueprint event that can be overridden in blueprint and c++ (creates an _implementation function)
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetHitReactMontage();
+
+	virtual void Die() = 0;
 };
