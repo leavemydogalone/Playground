@@ -151,7 +151,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Mana);
 
 
-	/* Meta Attributes */
+	/* Meta Attributes - only exist on the server */
 
 	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
 	FGameplayAttributeData IncomingDamage;
@@ -221,4 +221,6 @@ public:
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
+
+	void ShowFloatingText(const FEffectProperties& Props, float Damage) const;
 };
