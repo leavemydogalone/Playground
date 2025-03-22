@@ -59,8 +59,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	//This is where we would need to clamp the attribute as pre-attribute change would not fire.
 	TargetBlockChance = FMath::Max<float>(TargetBlockChance, 0.f);
 
-	//this is not 100% accurate way to do this
 	const int32 Rand = FMath::RandRange(1, 100);
+
 	if (Rand < TargetBlockChance && Damage > 0) Damage = Damage / 2;
 
 	const FGameplayModifierEvaluatedData EvaluatedData(UAuraAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
