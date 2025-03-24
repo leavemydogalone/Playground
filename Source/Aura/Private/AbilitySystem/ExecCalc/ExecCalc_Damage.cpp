@@ -6,6 +6,7 @@
 #include "Game/AuraGameModeBase.h"
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "Interaction/CombatInterface.h"
+#include "AuraAbilityTypes.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 
 struct AuraDamageStatics
@@ -79,9 +80,13 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	//Clamp, the attribute as pre-attribute change does not fire with ExecCalcs
 	TargetBlockChance = FMath::Max<float>(TargetBlockChance, 0.f);
 
-	//Half damage, if blocked. this is not 100% accurate way to do this. See ep 145 comments
-	const int32 Rand = FMath::RandRange(1, 100);
-	if (Rand < TargetBlockChance && Damage > 0) 
+	//Block. this is not 100% accurate way to do this. See ep 145 comments
+	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
+
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+	UAuraAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlocked);
+
+	if (bBlocked) 
 	{
 		Damage = Damage / 2;
 	}
@@ -128,6 +133,9 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalResistance * CriticalHitResistanceCoefficient;
 	const bool bCriticalHit = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
+
+	UAuraAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bCriticalHit);
+
 	if (bCriticalHit)
 	{
 		Damage = Damage * 2 + SourceCriticalHitDamage;
