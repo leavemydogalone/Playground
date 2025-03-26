@@ -139,6 +139,7 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	{
 		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
 	}
+	//I believe this will only be true on the server, as Damage is a meta attribute, aka not replicated
 	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
 	{
 		const float LocalIncomingDamage = GetIncomingDamage();
@@ -167,7 +168,6 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 			const bool bBlockedHit = UAuraAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
 			const bool bCriticalHit = UAuraAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
 
-			//Move outside this if statement, if want to show damage <= 0
 			ShowFloatingText(Props, LocalIncomingDamage, bBlockedHit, bCriticalHit);
 		}
 	}
