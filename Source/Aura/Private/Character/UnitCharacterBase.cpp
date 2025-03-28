@@ -40,6 +40,24 @@ void AUnitCharacterBase::PossessedBy(AController* NewController)
 	AuraAIController = Cast<AAuraAIController>(NewController);
 }
 
+void AUnitCharacterBase::HighlightActor()
+{
+}
+
+void AUnitCharacterBase::UnHighlightActor()
+{
+}
+
+//bool AUnitCharacterBase::CanBeControlledBy(APlayerController* Controller) const
+//{
+//	return false;
+//}
+//
+//void AUnitCharacterBase::InitializeUnit(APlayerState* OwningPlayer)
+//{
+//	OwnerPlayerState = OwningPlayer;
+//}
+
 void AUnitCharacterBase::BeginPlay()
 {
 	InitAbilityActorInfo();

@@ -5,16 +5,17 @@
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
-
+#include "Interaction/UnitInterface.h"
 #include "UnitCharacterBase.generated.h"
 
 class UBehaviorTree;
 class AAuraAIController;
+
 /**
  * 
  */
 UCLASS()
-class AURA_API AUnitCharacterBase : public AAuraCharacterBase
+class AURA_API AUnitCharacterBase : public AAuraCharacterBase, public IUnitInterface
 {
 	GENERATED_BODY()
 
@@ -23,7 +24,15 @@ public:
 
 	virtual void PossessedBy(AController* NewController) override;
 
+	// Enemy interface
+	virtual void HighlightActor() override;
+	virtual void UnHighlightActor() override;
+	// end Enemy interface
 	
+	//bool CanBeControlledBy(APlayerController* Controller) const;
+
+	//void InitializeUnit(APlayerState* OwningPlayer);
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -43,4 +52,5 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AAuraAIController> AuraAIController;
+
 };
