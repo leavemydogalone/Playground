@@ -102,7 +102,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		GetASC()->AbilityInputTagReleased(InputTag);
 	}
 
-	if (!bTargeting && !bShiftKeyDown)
+	/*if (!bTargeting && !bShiftKeyDown)
 	{
 		const APawn* ControlledPawn = GetPawn();
 
@@ -121,7 +121,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		}
 		FollowTime = 0;
 		bTargeting = false;
-	}
+	}*/
 }
 
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
@@ -151,7 +151,7 @@ void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 		if (APawn* ControlledPawn = GetPawn())
 		{
 			const FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
-			ControlledPawn->AddMovementInput(WorldDirection);
+			//ControlledPawn->AddMovementInput(WorldDirection);
 		}
 	}
 }

@@ -15,6 +15,7 @@ class UAuraInputConfig;
 class UDamageTextComponent;
 class UAuraAbilitySystemComponent;
 class USplineComponent;
+class MinionCharacterBase;
 
 /**
  * 
@@ -85,4 +86,5 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
+
 };
