@@ -54,6 +54,11 @@ void AUnitCharacterBase::UnHighlightActor()
 	Weapon->SetRenderCustomDepth(false);
 }
 
+AActor* AUnitCharacterBase::GetActor()
+{
+	return this;
+}
+
 
 //bool AUnitCharacterBase::CanBeControlledBy(APlayerController* Controller) const
 //{

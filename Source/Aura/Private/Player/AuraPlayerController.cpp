@@ -22,14 +22,6 @@ AAuraPlayerController::AAuraPlayerController()
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 }
 
-//void AAuraPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-//{
-//	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-//
-//	// Replicate SelectedActor, but only to the owning player
-//	DOREPLIFETIME_CONDITION(AAuraPlayerController, SelectedActor, COND_OwnerOnly);
-//}
-
 void AAuraPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
@@ -38,6 +30,28 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 
 	AutoRun();
 }
+
+void AAuraPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// Replicate SelectedUnit, but only to the owning player
+	DOREPLIFETIME_CONDITION(AAuraPlayerController, SelectedUnit, COND_OwnerOnly);
+}
+
+void AAuraPlayerController::OnRep_SelectedUnit()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Selected Unit: %s"), *GetNameSafe(SelectedUnit));
+}
+
+void AAuraPlayerController::ServerSelectUnit_Implementation()
+{
+	if (ThisActor)
+	{
+		SelectedUnit = ThisActor->GetActor();
+	}
+}
+
 
 void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit)
 {
@@ -94,6 +108,9 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	{
 		bTargeting = ThisActor ? true : false;
 		bAutoRunning = false;
+
+		ServerSelectUnit();
+		OnRep_SelectedUnit();
 
 		//ue_log the actor of cursor hit
 		if (CursorHit.GetActor())
@@ -182,15 +199,6 @@ UAuraAbilitySystemComponent* AAuraPlayerController::GetASC()
 	return AuraAbilitySystemComponent;
 }
 
-
-void AAuraPlayerController::SelectUnit()
-{
-	if (!ThisActor) return;
-
-	//write debug message with getting the name of ThisActor's actor	
-
-}
-
 void AAuraPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -226,17 +234,7 @@ void AAuraPlayerController::SetupInputComponent()
 	AuraInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
-//void AAuraPlayerController::OnRep_SelectedActor()
-//{
-//}
-//
-//void AAuraPlayerController::ServerSelectUnit(AActor* Unit)
-//{
-//}
-//
-//void AAuraPlayerController::ServerSelectUnit_Implementation(AActor* Unit)
-//{
-//}
+
 
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
