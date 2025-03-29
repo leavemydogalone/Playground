@@ -28,6 +28,9 @@ public:
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 
+	UFUNCTION(BlueprintCallable)
+	void SetSelectedUnit(AUnitCharacterBase* NewUnit);
+
 protected:
 
 	UPROPERTY(VisibleAnywhere)
@@ -36,9 +39,11 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	UPROPERTY()
+	UPROPERTY(ReplicatedUsing = OnRep_SelectedUnit)
 	AUnitCharacterBase* SelectedUnit;
 
+	UFUNCTION()
+	void OnRep_SelectedUnit();
 
 private:
 

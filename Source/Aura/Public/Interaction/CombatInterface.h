@@ -36,4 +36,5 @@ public:
 	UAnimMontage* GetHitReactMontage();
 
 	virtual void Die() = 0;
+	
 };

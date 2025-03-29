@@ -22,11 +22,30 @@ void AAuraPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AAuraPlayerState, Level);
+	DOREPLIFETIME(AAuraPlayerState, SelectedUnit);
 }
 
 UAbilitySystemComponent* AAuraPlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void AAuraPlayerState::SetSelectedUnit(AUnitCharacterBase* NewUnit)
+{
+	if (HasAuthority())
+	{
+		SelectedUnit = NewUnit;
+		UE_LOG(LogTemp, Warning, TEXT("Selected Unit: %s"), *GetNameSafe(SelectedUnit));
+
+	}
+}
+
+void AAuraPlayerState::OnRep_SelectedUnit()
+{
+	//write a debug message on screen of the new selected unit
+	
+		UE_LOG(LogTemp, Warning, TEXT("Client Selected Unit: %s"), *GetNameSafe(SelectedUnit));
+	
 }
 
 void AAuraPlayerState::OnRep_Level(int32 OldLevel)
