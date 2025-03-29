@@ -108,6 +108,12 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	{
 		bTargeting = ThisActor ? true : false;
 		bAutoRunning = false;
+
+		//ue_log the actor of cursor hit
+		if (CursorHit.GetActor())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Cursor hit actor: %s"), *CursorHit.GetActor()->GetName());
+		}
 	}
 }
 

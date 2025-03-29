@@ -28,24 +28,6 @@ public:
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 
-	UPROPERTY(ReplicatedUsing = OnRep_ControlledUnits)
-	TArray<AUnitCharacterBase*> ControlledUnits;
-
-	UPROPERTY(ReplicatedUsing = OnRep_SelectedUnits)
-	TArray<AUnitCharacterBase*> SelectedUnits;
-
-	UFUNCTION(Server, Reliable)
-	void ServerRegisterUnit(AUnitCharacterBase* Unit);
-
-	UFUNCTION(Server, Reliable)
-	void ServerSelectUnit(AUnitCharacterBase* Unit);
-
-	UFUNCTION()
-	void OnRep_ControlledUnits();
-
-	UFUNCTION()
-	void OnRep_SelectedUnits();
-
 protected:
 
 	UPROPERTY(VisibleAnywhere)
@@ -53,6 +35,9 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	UPROPERTY()
+	AUnitCharacterBase* SelectedUnit;
 
 
 private:

@@ -29,7 +29,7 @@ class AURA_API AAuraPlayerController : public APlayerController
 public:
 	AAuraPlayerController();
 
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	//virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	virtual void PlayerTick(float DeltaTime) override;
 
@@ -42,15 +42,15 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
-	UPROPERTY(ReplicatedUsing = OnRep_SelectedUnit)
-	AActor* SelectedUnit;
+	//UPROPERTY(ReplicatedUsing = OnRep_SelectedUnit)
+	//AActor* SelectedUnit;
 
-	UFUNCTION()
-	void OnRep_SelectedUnit(); // Called when SelectedUnit is updated
+	//UFUNCTION()
+	//void OnRep_SelectedUnit(); // Called when SelectedUnit is updated
 
-	UFUNCTION(Server, Reliable)
-	void ServerSelectUnit();
-	void ServerSelectUnit_Implementation();
+	//UFUNCTION(Server, Reliable)
+	//void ServerSelectUnit();
+	//void ServerSelectUnit_Implementation();
 
 private:
 	UPROPERTY(EditAnywhere, Category="Input")

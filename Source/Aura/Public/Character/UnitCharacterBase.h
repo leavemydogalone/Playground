@@ -24,11 +24,10 @@ public:
 
 	virtual void PossessedBy(AController* NewController) override;
 
-	// Enemy interface
+	// Unit interface
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-	virtual AActor* GetActor() override;
-	// end Enemy interface
+	// end Unit interface
 	
 
 protected:

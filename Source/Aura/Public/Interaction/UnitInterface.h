@@ -25,5 +25,4 @@ class AURA_API IUnitInterface
 public:
 	virtual void HighlightActor() = 0;
 	virtual void UnHighlightActor() = 0;
-	virtual AActor* GetActor() = 0;
 };
