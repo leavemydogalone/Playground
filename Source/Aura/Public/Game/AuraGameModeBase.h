@@ -25,7 +25,7 @@ public:
 
 	void SpawnUnitsForPlayer(APlayerController* Player);
 
-	FVector GetSpawnLocationForPlayer(APlayerController* Player, int Index);
+	FVector GetSpawnLocationForPlayer(FVector PawnLocation, int Index);
 
 protected:
 	//create a default unit pawn variable that can be assigned in blueprint, and will be used in the spawn unit function

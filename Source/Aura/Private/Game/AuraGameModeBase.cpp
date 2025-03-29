@@ -24,10 +24,10 @@ void AAuraGameModeBase::SpawnUnitsForPlayer(APlayerController* Player)
 
 	if (APawn* PlayerPawn = Player->GetPawn())
 	{
+		FVector PawnLocation = PlayerPawn->GetActorLocation();
 		for (int i = 0; i < 2; i++)
 		{
-			FVector PawnLocation = PlayerPawn->GetActorLocation();
-			FVector SpawnLocation = GetSpawnLocationForPlayer(Player, i);
+			FVector SpawnLocation = GetSpawnLocationForPlayer(PawnLocation, i);
 			FActorSpawnParameters SpawnParams;
 			SpawnParams.Owner = Player;
 			SpawnParams.Instigator = nullptr;
@@ -38,15 +38,14 @@ void AAuraGameModeBase::SpawnUnitsForPlayer(APlayerController* Player)
 				//NewUnit->InitializeUnit(PlayerState, StatsArray[i]);
 				NewUnit->SetOwner(Player);
 			}
-
-			//create random vector spawn location within 200 units of pawn
-			SpawnLocation += FMath::VRand() * 200.f;
 		}
 	}
 }
 
-FVector AAuraGameModeBase::GetSpawnLocationForPlayer(APlayerController* Player, int Index)
+FVector AAuraGameModeBase::GetSpawnLocationForPlayer(FVector PawnLocation, int Index)
 {
-	FVector BaseSpawnLocation = FVector(0.0f, Index * 200.0f, 100.0f); // Adjust for formation
+
+	FVector RandomLocation = FVector(FMath::RandRange(-1000, 1000), FMath::RandRange(-1000, 1000), 0.f);
+	FVector BaseSpawnLocation = PawnLocation + RandomLocation;// Adjust for formation
 	return BaseSpawnLocation;
 }

@@ -42,11 +42,18 @@ void AUnitCharacterBase::PossessedBy(AController* NewController)
 
 void AUnitCharacterBase::HighlightActor()
 {
+	GetMesh()->SetRenderCustomDepth(true);
+	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
+	Weapon->SetRenderCustomDepth(true);
+	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
 void AUnitCharacterBase::UnHighlightActor()
 {
+	GetMesh()->SetRenderCustomDepth(false);
+	Weapon->SetRenderCustomDepth(false);
 }
+
 
 //bool AUnitCharacterBase::CanBeControlledBy(APlayerController* Controller) const
 //{

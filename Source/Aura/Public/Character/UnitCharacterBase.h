@@ -29,9 +29,6 @@ public:
 	virtual void UnHighlightActor() override;
 	// end Enemy interface
 	
-	//bool CanBeControlledBy(APlayerController* Controller) const;
-
-	//void InitializeUnit(APlayerState* OwningPlayer);
 
 protected:
 
