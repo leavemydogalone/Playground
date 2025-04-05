@@ -41,7 +41,7 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 
 	UPROPERTY(ReplicatedUsing = OnRep_SelectedUnit)
-	AUnitCharacterBase* SelectedUnit;
+	TObjectPtr<AUnitCharacterBase> SelectedUnit;
 
 	UFUNCTION()
 	void OnRep_SelectedUnit();

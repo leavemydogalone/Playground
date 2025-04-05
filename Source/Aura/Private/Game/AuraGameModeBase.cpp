@@ -45,7 +45,7 @@ void AAuraGameModeBase::SpawnUnitsForPlayer(APlayerController* Player)
 FVector AAuraGameModeBase::GetSpawnLocationForPlayer(FVector PawnLocation, int Index)
 {
 
-	FVector RandomLocation = FVector(FMath::RandRange(-1000, 1000), FMath::RandRange(-1000, 1000), 0.f);
+	FVector RandomLocation = FVector(Index * 200, 0.f, 0.f);
 	FVector BaseSpawnLocation = PawnLocation + RandomLocation;// Adjust for formation
 	return BaseSpawnLocation;
 }
