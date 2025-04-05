@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "UnitInterface.generated.h"
+#include "PlayerInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI, BlueprintType)
-class UUnitInterface : public UInterface
+UINTERFACE(MinimalAPI)
+class UPlayerInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,13 +16,13 @@ class UUnitInterface : public UInterface
 /**
  * 
  */
-class AURA_API IUnitInterface
+class AURA_API IPlayerInterface
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
-
 public:
-	virtual void HighlightActor() = 0;
-	virtual void UnHighlightActor() = 0;
+
+	//UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "PlayerInterface")
+	//void SetSelectedUnit(AActor* NewUnit);
 };

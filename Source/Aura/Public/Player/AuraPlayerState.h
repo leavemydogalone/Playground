@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "Interaction/PlayerInterface.h"
 #include "GameFramework/PlayerState.h"
 #include "AuraPlayerState.generated.h"
 
@@ -28,8 +29,8 @@ public:
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 
-	UFUNCTION(BlueprintCallable)
-	void SetSelectedUnit(AUnitCharacterBase* NewUnit);
+	UFUNCTION(BlueprintCallable, Category = "Unit Management")
+	void SetSelectedUnit(AActor* NewUnit);
 
 protected:
 
