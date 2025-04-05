@@ -32,6 +32,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unit Management")
 	void SetSelectedUnit(AActor* NewUnit);
 
+	UFUNCTION(BlueprintCallable, Category = "Unit Management")
+	AUnitCharacterBase* GetSelectedUnit() const { return SelectedUnit; }
+
 protected:
 
 	UPROPERTY(VisibleAnywhere)

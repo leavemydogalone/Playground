@@ -9,6 +9,7 @@
 
 class UOverlayWidgetController;
 class UAbilitySystemComponent;
+class UAuraPlayerState;
 class UAttributeMenuWidgetController;
 /**
  * 
@@ -46,4 +47,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit);
+
+	static UAuraPlayerState* GetAuraPlayerState(const UObject* WorldContextObject);
 };

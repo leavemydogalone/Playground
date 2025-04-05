@@ -6,6 +6,8 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AuraGameplayTags.h"
+#include "Player/AuraPlayerState.h"
+#include "Character/UnitCharacterBase.h"
 #include "Components/SplineComponent.h"
 #include "NavigationSystem.h"
 #include "NavigationPath.h"
@@ -109,6 +111,7 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 		bTargeting = ThisActor ? true : false;
 		bAutoRunning = false;
 	}
+
 }
 
 void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
@@ -149,6 +152,12 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
+	if (GetSelectedUnitASC() && !InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_1))
+	{
+		GetSelectedUnitASC()->AbilityInputTagHeld(InputTag);
+		return;
+	}
+
 	if (!InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
 	{
 		if (GetASC()) {
@@ -188,6 +197,28 @@ UAuraAbilitySystemComponent* AAuraPlayerController::GetASC()
 			= Cast<UAuraAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
 	}
 	return AuraAbilitySystemComponent;
+}
+
+AAuraPlayerState* AAuraPlayerController::GetPS()
+{
+	if (AuraPlayerState == nullptr)
+	{
+		AuraPlayerState
+			= GetPlayerState<AAuraPlayerState>();
+	}
+	return AuraPlayerState;
+}
+
+UAuraAbilitySystemComponent* AAuraPlayerController::GetSelectedUnitASC()
+{
+	if (SelectedUnitASC == nullptr)
+	{
+		if (GetPS()->GetSelectedUnit())
+		{
+			SelectedUnitASC = Cast<UAuraAbilitySystemComponent>(GetPS()->GetSelectedUnit()->GetAbilitySystemComponent());
+		}
+	}
+	return SelectedUnitASC;
 }
 
 void AAuraPlayerController::BeginPlay()

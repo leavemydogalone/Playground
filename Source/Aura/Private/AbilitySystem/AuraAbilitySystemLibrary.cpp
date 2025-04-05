@@ -123,3 +123,8 @@ void UAuraAbilitySystemLibrary::SetIsCriticalHit(UPARAM(ref)FGameplayEffectConte
 		AuraEffectContext->SetIsCriticalHit(bInIsCriticalHit);
 	}
 }
+
+UAuraPlayerState* UAuraAbilitySystemLibrary::GetAuraPlayerState(const UObject* WorldContextObject)
+{
+	return nullptr;
+}

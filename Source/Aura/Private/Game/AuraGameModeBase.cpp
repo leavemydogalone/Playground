@@ -37,6 +37,7 @@ void AAuraGameModeBase::SpawnUnitsForPlayer(APlayerController* Player)
 			{
 				//NewUnit->InitializeUnit(PlayerState, StatsArray[i]);
 				NewUnit->SetOwner(Player);
+				NewUnit->SetAutonomousProxy(true);
 			}
 		}
 	}

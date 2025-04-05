@@ -15,7 +15,8 @@ class IUnitInterface;
 class UAuraInputConfig;
 class UDamageTextComponent;
 class UAuraAbilitySystemComponent;
-class USplineComponent;
+class USplineComponent;\
+class AAuraPlayerState;
 class MinionCharacterBase;
 
 /**
@@ -84,6 +85,16 @@ private:
 	TObjectPtr<UAuraAbilitySystemComponent> AuraAbilitySystemComponent;
 
 	UAuraAbilitySystemComponent* GetASC();
+
+	UPROPERTY()
+	TObjectPtr<AAuraPlayerState> AuraPlayerState;
+
+	AAuraPlayerState* GetPS();
+
+	UPROPERTY()
+	TObjectPtr<UAuraAbilitySystemComponent> SelectedUnitASC;
+
+	UAuraAbilitySystemComponent* GetSelectedUnitASC();
 
 	FVector CachedDestination = FVector::ZeroVector;
 	float FollowTime = 0.f;

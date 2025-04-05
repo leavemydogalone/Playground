@@ -57,7 +57,7 @@ void AUnitCharacterBase::UnHighlightActor()
 void AUnitCharacterBase::BeginPlay()
 {
 	InitAbilityActorInfo();
-
+	AddCharacterAbilities();
 }
 
 void AUnitCharacterBase::InitAbilityActorInfo()
